@@ -5,6 +5,9 @@ import sys
 
 
 def main():
+    """
+    The main function in manage.py in the gamerstack django project.
+    """
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gamerstack.settings')
     try:
         from django.core.management import execute_from_command_line
