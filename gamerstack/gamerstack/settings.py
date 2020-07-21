@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x7%c56l^e%o-$bvr5rnu%d#x_(4v$0a8l&pn-z@ezll=o#n=w7'
+_secret_key = os.getenv('GAMERSTACK_SECRET_KEY', None)
+if _secret_key is None:
+    raise ImproperlyConfigured('You must set an environment variable "GAMERSTACK_SECRET_KEY" '
+                               'to complete configuration.')
+SECRET_KEY = _secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
